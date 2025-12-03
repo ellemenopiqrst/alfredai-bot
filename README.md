@@ -1,40 +1,47 @@
 **AlfredAI.bot Landing Page**
+
 A clean, modern, and responsive one-page landing page for AlfredAI.bot's AI Fee Proposal Generator. Built as part of a test task for the Website, Funnel & Email Automation Specialist role at Offshore Talent.
 
 **Features:**
+
 **Hero Section:** Eye-catching headline, subtext, and call-to-action (CTA) with soft fade-in animation.
 **Features Section:** Three feature cards with icons, titles, and descriptions, including hover effects.
-Testimonials Section: Sample user quotes in a clean grid layout.
-Contact Form: Form with fields for Name, Email, Company, and Message, ready for backend integration.
-Responsive Design: Optimized for desktop and mobile using TailwindCSS.
-Animations: Subtle transitions and hover effects using Framer Motion.
+**Testimonials Section:** Sample user quotes in a clean grid layout.
+**Contact Form:** Form with fields for Name, Email, Company, and Message, ready for backend integration.
+**Responsive Design:** Optimized for desktop and mobile using TailwindCSS.
+**Animations:** Subtle transitions and hover effects using Framer Motion.
 
-Tech Stack
-Frontend: React, Next.js (App Router), TailwindCSS
-Icons: Lucide React
-Animations: Framer Motion
-Deployment: Vercel
+**Tech Stack**
+- Frontend: React, Next.js (App Router), TailwindCSS
+- Icons: Lucide React
+- Animations: Framer Motion
+- Deployment: Vercel
+- Backend Integration: Ready for API (e.g., Supabase + Resend for email capture)
 
-Backend Integration: Ready for API (e.g., Supabase + Resend for email capture)
+**Getting Started**
+**Prerequisites**
+- Node.js (version 18+ recommended)
+- npm or yarn
+- Git
 
-Getting Started
-Prerequisites
-Node.js (version 18+ recommended)
-npm or yarn
-Git
+  
 **Installation**
+
+1. Clone the repository:
 ```
-**Clone the repository:**
 git clone https://github.com/ellemenopiqrst/alfredai-bot.git
 cd alfredai-bot
 ```
-**Install dependencies:**
+2. Install dependencies:
+```
 npm install
-
-**Run the development server:**
+```
+3. Run the development server:
+```
 npm run dev
-Open http://localhost:3000 in your browser to view the landing page.
 
+```
+4. Open http://localhost:3000 in your browser to view the landing page.
 **Building for Production**
 npm run build
 npm run start
