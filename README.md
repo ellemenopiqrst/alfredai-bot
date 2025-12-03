@@ -61,6 +61,7 @@ The project is deployed on Vercel for easy hosting:
 Live demo: https://alfredai-bot.vercel.app (replace with your actual Vercel URL).
 
 **Project Structure**
+```
 alfredai-bot/
 
 ├── .env.local
@@ -117,7 +118,7 @@ alfredai-bot/
 └── public/
 
     └── images/
-    
+```
 **Contributing**
 This is a test project, but feel free to fork and improve! For changes:
 
