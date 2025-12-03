@@ -5,10 +5,15 @@ A clean, modern, and responsive one-page landing page for AlfredAI.bot's AI Fee 
 **Features:**
 
 **Hero Section:** Eye-catching headline, subtext, and call-to-action (CTA) with soft fade-in animation.
+
 **Features Section:** Three feature cards with icons, titles, and descriptions, including hover effects.
+
 **Testimonials Section:** Sample user quotes in a clean grid layout.
+
 **Contact Form:** Form with fields for Name, Email, Company, and Message, ready for backend integration.
+
 **Responsive Design:** Optimized for desktop and mobile using TailwindCSS.
+
 **Animations:** Subtle transitions and hover effects using Framer Motion.
 
 **Tech Stack**
@@ -57,32 +62,60 @@ Live demo: https://alfredai-bot.vercel.app (replace with your actual Vercel URL)
 
 **Project Structure**
 alfredai-bot/
+
 ├── .env.local
+
 ├── .gitignore
+
 ├── next.config.js
+
 ├── package.json
+
 ├── tailwind.config.js
+
+
 ├── postcss.config.js
+
 ├── README.md
+
 ├── app/
+
 │   ├── layout.js
+
 │   ├── page.js
+
 │   ├── globals.css
+
 │   └── api/
+
 │       └── contact/
+
 │           └── route.js
+
 ├── components/
+
 │   ├── Header.js
+
 │   ├── Hero.js
+
 │   ├── Features.js
+
 │   ├── Testimonials.js
+
 │   ├── ContactForm.js
+
 │   ├── Footer.js
+
 │   └── FadeInSection.js
+
 ├── lib/
+
 │   ├── supabase.js
+
 │   └── resend.js
+
 └── public/
+
     └── images/
     
 **Contributing**
