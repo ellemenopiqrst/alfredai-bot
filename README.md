@@ -63,7 +63,6 @@ Live demo: https://alfredai-bot.vercel.app (replace with your actual Vercel URL)
 **Project Structure**
 ```
 alfredai-bot/
-
 ├── .env.local
 ├── .gitignore
 ├── next.config.js
