@@ -13,6 +13,7 @@ export default function ContactForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -22,6 +23,9 @@ export default function ContactForm() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setErrorMessage('')
+
+    console.log('📤 Submitting form data:', formData)
 
     try {
       const response = await fetch('/api/contact', {
@@ -33,17 +37,20 @@ export default function ContactForm() {
       })
 
       const data = await response.json()
+      console.log('📥 Response:', data)
 
       if (response.ok) {
         setSubmitStatus('success')
         setFormData({ name: '', email: '', company: '', message: '' })
       } else {
         setSubmitStatus('error')
-        console.error('Error:', data.error)
+        setErrorMessage(data.error || 'Something went wrong')
+        console.error('❌ Error:', data.error)
       }
     } catch (error) {
       setSubmitStatus('error')
-      console.error('Error:', error)
+      setErrorMessage('Network error. Please check your connection.')
+      console.error('❌ Error:', error)
     } finally {
       setIsSubmitting(false)
     }
@@ -113,12 +120,12 @@ export default function ContactForm() {
             </button>
             {submitStatus === 'success' && (
               <p className="mt-4 text-green-600 text-center font-medium">
-                Thank you! We'll be in touch soon.
+                ✅ Thank you! We'll be in touch soon.
               </p>
             )}
             {submitStatus === 'error' && (
               <p className="mt-4 text-red-600 text-center font-medium">
-                Something went wrong. Please try again.
+                ❌ {errorMessage}
               </p>
             )}
           </div>

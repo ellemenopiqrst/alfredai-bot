@@ -4,9 +4,20 @@ import { sendThankYouEmail, sendNotificationEmail } from '@/lib/resend'
 
 export async function POST(request) {
   try {
+    // Check if Supabase is configured
+    if (!supabase) {
+      console.error('Supabase client not initialized')
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Parse request body
     const body = await request.json()
     const { name, email, company, message } = body
+
+    console.log('Received form data:', { name, email, company })
 
     // Validation
     if (!name || !email || !company || !message) {
@@ -34,7 +45,6 @@ export async function POST(request) {
     const userIp = request.headers.get('x-forwarded-for')?.split(',')[0] || 
                    request.headers.get('x-real-ip') || 
                    'unknown'
-    const createdAt = new Date().toISOString()
 
     // Prepare data for Supabase
     const contactData = {
@@ -44,9 +54,10 @@ export async function POST(request) {
       message: message.trim(),
       utm_source: utmSource,
       referrer: referrer,
-      user_ip: userIp,
-      created_at: createdAt
+      user_ip: userIp
     }
+
+    console.log('Attempting to insert into Supabase...')
 
     // Insert into Supabase
     const { data, error: supabaseError } = await supabase
@@ -57,28 +68,26 @@ export async function POST(request) {
     if (supabaseError) {
       console.error('Supabase error:', supabaseError)
       return NextResponse.json(
-        { error: 'Failed to save contact information' },
+        { error: 'Failed to save: ' + supabaseError.message },
         { status: 500 }
       )
     }
 
-    // Send thank you email to user
+    console.log('✅ Successfully inserted into Supabase:', data)
+
+    // Send emails (don't fail if emails fail)
     try {
       await sendThankYouEmail(name, email)
+      console.log('✅ Thank you email sent')
     } catch (emailError) {
-      console.error('Error sending thank you email:', emailError)
-      // Continue even if email fails
+      console.error('⚠️ Email failed (continuing anyway):', emailError.message)
     }
 
-    // Send notification email to admin
     try {
-      await sendNotificationEmail({
-        ...contactData,
-        createdAt
-      })
+      await sendNotificationEmail(contactData)
+      console.log('✅ Notification email sent')
     } catch (emailError) {
-      console.error('Error sending notification email:', emailError)
-      // Continue even if email fails
+      console.error('⚠️ Notification failed (continuing anyway):', emailError.message)
     }
 
     // Return success response
@@ -89,15 +98,14 @@ export async function POST(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('API error:', error)
+    console.error('❌ API error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error: ' + error.message },
       { status: 500 }
     )
   }
 }
 
-// Handle other HTTP methods
 export async function GET() {
   return NextResponse.json(
     { message: 'Contact API endpoint. Use POST to submit contact form.' },

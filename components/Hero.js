@@ -1,7 +1,29 @@
+'use client'
+
+import { useState } from 'react'
 import { Send, CheckCircle } from 'lucide-react'
 import FadeInSection from './FadeInSection'
 
 export default function Hero() {
+  const [email, setEmail] = useState('')
+
+  const handleGetStarted = () => {
+    if (email) {
+      // Scroll to contact form
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+      // Optional: Pre-fill the contact form email
+      setTimeout(() => {
+        const contactEmailInput = document.querySelector('#contact input[type="email"]')
+        if (contactEmailInput) {
+          contactEmailInput.value = email
+          contactEmailInput.dispatchEvent(new Event('input', { bubbles: true }))
+        }
+      }, 500)
+    } else {
+      alert('Please enter your email address')
+    }
+  }
+
   return (
     <section className="pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -20,10 +42,15 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="What's your work mail?"
                 className="flex-1 px-6 py-4 border-2 border-slate-200 rounded-full focus:border-pink-500 focus:outline-none transition-colors"
               />
-              <button className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2">
+              <button 
+                onClick={handleGetStarted}
+                className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2"
+              >
                 Get Started Free
                 <Send className="w-5 h-5" />
               </button>
