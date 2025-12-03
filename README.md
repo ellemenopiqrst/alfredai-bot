@@ -65,58 +65,31 @@ Live demo: https://alfredai-bot.vercel.app (replace with your actual Vercel URL)
 alfredai-bot/
 
 ├── .env.local
-
 ├── .gitignore
-
 ├── next.config.js
-
 ├── package.json
-
 ├── tailwind.config.js
-
-
 ├── postcss.config.js
-
 ├── README.md
-
 ├── app/
-
 │   ├── layout.js
-
 │   ├── page.js
-
 │   ├── globals.css
-
 │   └── api/
-
 │       └── contact/
-
 │           └── route.js
-
 ├── components/
-
 │   ├── Header.js
-
 │   ├── Hero.js
-
 │   ├── Features.js
-
 │   ├── Testimonials.js
-
 │   ├── ContactForm.js
-
 │   ├── Footer.js
-
 │   └── FadeInSection.js
-
 ├── lib/
-
 │   ├── supabase.js
-
 │   └── resend.js
-
 └── public/
-
     └── images/
 ```
 **Contributing**
