@@ -16,6 +16,11 @@ export default function Header() {
 
   const closeMenu = () => setMobileMenuOpen(false)
 
+  const handleBookDemo = () => {
+    closeMenu()
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <>
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -42,8 +47,11 @@ export default function Header() {
             <a href="#contact" className="text-slate-600 hover:text-slate-900 transition-colors font-medium">
               Contact
             </a>
-            <button className="px-6 py-2 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full hover:shadow-lg hover:scale-105 transition-all font-semibold">
-              Sign In
+            <button 
+              onClick={handleBookDemo}
+              className="px-6 py-2 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full hover:shadow-lg hover:scale-105 transition-all font-semibold"
+            >
+              Book a Demo
             </button>
           </div>
 
@@ -97,8 +105,11 @@ export default function Header() {
           >
             Contact
           </a>
-          <button className="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full hover:shadow-lg transition-all font-semibold mt-4">
-            Sign In
+          <button 
+            onClick={handleBookDemo}
+            className="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full hover:shadow-lg transition-all font-semibold mt-4"
+          >
+            Book a Demo
           </button>
         </div>
       </div>

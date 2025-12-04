@@ -7,20 +7,26 @@ import FadeInSection from './FadeInSection'
 export default function Hero() {
   const [email, setEmail] = useState('')
 
-  const handleGetStarted = () => {
-    if (email) {
-      // Scroll to contact form
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-      // Optional: Pre-fill the contact form email
-      setTimeout(() => {
-        const contactEmailInput = document.querySelector('#contact input[type="email"]')
-        if (contactEmailInput) {
-          contactEmailInput.value = email
-          contactEmailInput.dispatchEvent(new Event('input', { bubbles: true }))
-        }
-      }, 500)
+  const handleGetStarted = (e) => {
+    e.preventDefault()
+    if (email && email.includes('@')) {
+      // Dispatch custom event with email
+      window.dispatchEvent(new CustomEvent('heroEmailSet', { 
+        detail: { email: email } 
+      }))
+      
+      // Add email to URL params
+      const url = new URL(window.location.href)
+      url.searchParams.set('email', email)
+      window.history.pushState({}, '', url)
+      
+      // Scroll to contact
+      const contactSection = document.getElementById('contact')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' })
+      }
     } else {
-      alert('Please enter your email address')
+      alert('Please enter a valid email address')
     }
   }
 
@@ -44,6 +50,7 @@ export default function Hero() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleGetStarted(e)}
                 placeholder="What's your work mail?"
                 className="flex-1 px-6 py-4 border-2 border-slate-200 rounded-full focus:border-pink-500 focus:outline-none transition-colors"
               />

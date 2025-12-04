@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Send } from 'lucide-react'
 import FadeInSection from './FadeInSection'
 
@@ -15,8 +15,39 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
 
+  // Check for email from hero section on mount AND listen for changes
+  useEffect(() => {
+    const checkForEmail = () => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const emailParam = urlParams.get('email')
+      if (emailParam && emailParam !== formData.email) {
+        setFormData(prev => ({ ...prev, email: emailParam }))
+      }
+    }
+
+    // Check immediately
+    checkForEmail()
+
+    // Listen for popstate events (when URL changes)
+    window.addEventListener('popstate', checkForEmail)
+    
+    // Also set up a listener for custom events
+    const handleEmailUpdate = (e) => {
+      if (e.detail && e.detail.email) {
+        setFormData(prev => ({ ...prev, email: e.detail.email }))
+      }
+    }
+    window.addEventListener('heroEmailSet', handleEmailUpdate)
+
+    return () => {
+      window.removeEventListener('popstate', checkForEmail)
+      window.removeEventListener('heroEmailSet', handleEmailUpdate)
+    }
+  }, [])
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -42,6 +73,8 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitStatus('success')
         setFormData({ name: '', email: '', company: '', message: '' })
+        // Clear URL params
+        window.history.replaceState({}, '', window.location.pathname)
       } else {
         setSubmitStatus('error')
         setErrorMessage(data.error || 'Something went wrong')
@@ -119,14 +152,21 @@ export default function ContactForm() {
               <Send className="w-5 h-5" />
             </button>
             {submitStatus === 'success' && (
-              <p className="mt-4 text-green-600 text-center font-medium">
-                ✅ Thank you! We'll be in touch soon.
-              </p>
+              <div className="mt-6 p-4 bg-green-50 border-2 border-green-500 rounded-xl">
+                <p className="text-green-700 text-center font-medium text-lg">
+                  ✅ Thank you! We'll be in touch within 24 hours.
+                </p>
+              </div>
             )}
             {submitStatus === 'error' && (
-              <p className="mt-4 text-red-600 text-center font-medium">
-                ❌ {errorMessage}
-              </p>
+              <div className="mt-6 p-4 bg-red-50 border-2 border-red-500 rounded-xl">
+                <p className="text-red-700 text-center font-medium">
+                  ❌ {errorMessage}
+                </p>
+                <p className="text-red-600 text-center text-sm mt-2">
+                  Please try again or email us directly at ellejohnc@gmail.com
+                </p>
+              </div>
             )}
           </div>
         </FadeInSection>
