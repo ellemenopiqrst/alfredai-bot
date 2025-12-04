@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 /*import { sendThankYouEmail, sendNotificationEmail } from '@/lib/resend'*/
-import { sendThankYouEmail, sendNotificationEmail } from '@/lib/resend'
+import { sendThankYouEmail, sendNotificationEmail } from '@/lib/email'
+/*import { sendThankYouEmail, sendNotificationEmail } from '@/lib/sendgrid'*/
+/*(import { sendThankYouEmail, sendNotificationEmail } from '@/lib/mailgun'*/
 
 export async function POST(request) {
   try {
