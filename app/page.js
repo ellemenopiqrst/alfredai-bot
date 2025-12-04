@@ -1,6 +1,9 @@
+'use client'
+
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
+import UseCases from '@/components/UseCases'
 import Testimonials from '@/components/Testimonials'
 import ContactForm from '@/components/ContactForm'
 import Footer from '@/components/Footer'
@@ -10,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       <Header />
       <Hero />
+      <UseCases />
       <Features />
       <Testimonials />
       <ContactForm />
