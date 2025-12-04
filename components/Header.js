@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -21,20 +22,30 @@ export default function Header() {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    closeMenu()
+  }
+
   return (
     <>
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-white/90 backdrop-blur-sm'
       }`}>
         <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-xl">A</span>
+          {/* Clickable Logo */}
+          <button 
+            onClick={scrollToTop}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+              <span className="text-white font-bold text-xl relative z-10">A</span>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
               Alfred AI
             </span>
-          </div>
+          </button>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">

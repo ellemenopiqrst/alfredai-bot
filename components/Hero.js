@@ -1,26 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, Play } from 'lucide-react'
 import FadeInSection from './FadeInSection'
 
 export default function Hero() {
   const [email, setEmail] = useState('')
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const handleGetStarted = (e) => {
     e.preventDefault()
     if (email && email.includes('@')) {
-      // Dispatch custom event with email
-      window.dispatchEvent(new CustomEvent('heroEmailSet', { 
-        detail: { email: email } 
-      }))
-      
-      // Add email to URL params
       const url = new URL(window.location.href)
       url.searchParams.set('email', email)
       window.history.pushState({}, '', url)
       
-      // Scroll to contact
+      window.dispatchEvent(new CustomEvent('heroEmailSet', { 
+        detail: { email: email } 
+      }))
+      
       const contactSection = document.getElementById('contact')
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth' })
@@ -39,7 +37,7 @@ export default function Hero() {
               AI-CENTRIC BUSINESS OPERATING SYSTEM
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
-              Your AI Partner for Business Growth
+              Automate 80% of Your Admin Work
             </h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
               We create automation systems powered by our knowledge management infrastructure to protect margins, scale expertise, strengthen accountability, and lift EBITDA.
@@ -85,24 +83,36 @@ export default function Hero() {
         <FadeInSection delay={200}>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-600 rounded-3xl blur-3xl opacity-20"></div>
-            <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-slate-200">
-              <div className="flex flex-wrap gap-3 mb-6">
+            <div className="relative bg-white rounded-3xl shadow-2xl p-4 border border-slate-200 overflow-hidden">
+              {/* Video Container */}
+              <div className="relative w-full aspect-video bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl overflow-hidden group">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/video-poster.jpg"
+                >
+                  <source src="/hero-video.mp4" type="video/mp4" />
+                </video>
+                
+                {/* Overlay Text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <p className="text-lg font-bold mb-1">Automate 80% of Admin Work</p>
+                    <p className="text-sm opacity-90">Save time. Scale faster. Grow smarter.</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* AI Badges */}
+              <div className="flex flex-wrap gap-2 mt-4">
                 {['ChatGPT', 'Claude', 'Gemini', 'Grok', 'DeepSeek'].map((ai, i) => (
-                  <div key={i} className="px-4 py-2 bg-gradient-to-r from-slate-100 to-slate-50 rounded-full text-sm font-medium text-slate-700 border border-slate-200">
+                  <div key={i} className="px-3 py-1 bg-gradient-to-r from-slate-100 to-slate-50 rounded-full text-xs font-medium text-slate-700 border border-slate-200">
                     {ai}
                   </div>
                 ))}
-              </div>
-              <div className="w-full h-64 bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-white rounded-full shadow-lg mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-12 h-12 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <p className="text-slate-600 font-medium text-lg">Turn Managed Knowledge</p>
-                  <p className="text-slate-600 font-medium text-lg">into Operational Profits</p>
-                </div>
               </div>
             </div>
           </div>
