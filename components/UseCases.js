@@ -91,14 +91,14 @@ export default function UseCases() {
                     {useCase.description}
                   </p>
                   
-                  <div className="mt-4 pt-4 border-t border-slate-200">
+                {/* div className="mt-4 pt-4 border-t border-slate-200">
                     <button className="text-sm font-semibold text-pink-600 hover:text-pink-700 flex items-center gap-1 group-hover:gap-2 transition-all">
                       Learn more
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </FadeInSection>
             )
