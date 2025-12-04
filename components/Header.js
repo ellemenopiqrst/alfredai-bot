@@ -32,7 +32,7 @@ export default function Header() {
               <span className="text-white font-bold text-xl">A</span>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              alfred ai
+              Alfred AI
             </span>
           </div>
           
