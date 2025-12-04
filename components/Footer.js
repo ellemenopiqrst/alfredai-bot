@@ -6,7 +6,7 @@ export default function Footer() {
           <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center">
             <span className="text-white font-bold text-xl">A</span>
           </div>
-          <span className="text-2xl font-bold">alfred ai</span>
+          <span className="text-2xl font-bold">Alfred AI</span>
         </div>
         <p className="text-slate-400 mb-8">Your AI Partner for Business Growth</p>
         <div className="flex justify-center gap-6 mb-8">
@@ -14,7 +14,7 @@ export default function Footer() {
           <a href="#testimonials" className="text-slate-400 hover:text-white transition-colors">Testimonials</a>
           <a href="#contact" className="text-slate-400 hover:text-white transition-colors">Contact</a>
         </div>
-        <p className="text-slate-500 text-sm">© 2024 AlfredAI. All rights reserved.</p>
+        <p className="text-slate-500 text-sm">© 2025 AlfredAI. All rights reserved.</p>
       </div>
     </footer>
   )
