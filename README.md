@@ -85,9 +85,10 @@ alfredai-bot/
 │   ├── ContactForm.js
 │   ├── Footer.js
 │   └── FadeInSection.js
+│   └── UseCases.js
 ├── lib/
 │   ├── supabase.js
-│   └── resend.js
+│   └── email.js
 └── public/
     └── images/
 ```
