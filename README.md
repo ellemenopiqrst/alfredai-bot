@@ -21,7 +21,7 @@ A clean, modern, and responsive one-page landing page for AlfredAI.bot's AI Fee 
 - Icons: Lucide React
 - Animations: Framer Motion
 - Deployment: Vercel
-- Backend Integration: Ready for API (e.g., Supabase + Resend for email capture)
+- Backend Integration: Ready for API (e.g., Supabase + Nodemailer for email capture)
 
 **Getting Started**
 **Prerequisites**
