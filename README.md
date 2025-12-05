@@ -58,7 +58,7 @@ The project is deployed on Vercel for easy hosting:
 2. Import the repo on vercel.com.
 3.Deploy automatically – Vercel detects Next.js and handles the build.
 
-Live demo: https://alfredai-bot.vercel.app (replace with your actual Vercel URL).
+Live demo: https://alfredai-bot.vercel.app.
 
 **Project Structure**
 ```
